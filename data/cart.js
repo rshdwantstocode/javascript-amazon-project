@@ -4,13 +4,13 @@ export function addtoCart(productId){
     let matchItem;
     let messageTimeoutId;
 
-    cart.forEach((item)=>{
-        if (productId === item.productId) {
-            matchItem = item;
+    //process to check if the item is already in the cart
+    cart.forEach((cartItems)=>{
+        if (productId === cartItems.productId) {
+            matchItem = cartItems;
         };
     });
 
-    
     let quantitySelector = document.querySelector(`.js-quantity-selector-${productId}`); //for the quantity value
     let quantity = Number(quantitySelector.value);
 
@@ -23,6 +23,7 @@ export function addtoCart(productId){
       });
     };
 
+    //Added paragraph sign
     let addedStyle = document.querySelector(`.js-added-cart-${productId}`);
     addedStyle.classList.add('added-to-cart-visible');  
 
