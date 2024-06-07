@@ -1,4 +1,5 @@
-import { cart, removefromCart } from "../data/cart.js";
+import { cart, removefromCart
+            ,calculateCartQuantity } from "../data/cart.js";
 import { products } from "../data/products.js";
 import { moneyMatters } from "./utils/money.js";
 // import { updateCartQuantity } from "./amazon.js";
@@ -92,13 +93,10 @@ orderSummaryHTML += `<div class="cart-item-container
 
 
 function updateCartQuantity(){
-    let totalItems = 0;
-    cart.forEach(cartItem => {
-        totalItems += cartItem.quantity;
-    });
-    
+    const totalCartQuantity = calculateCartQuantity();
+
     document.querySelector('.js-checkout-items')
-            .innerHTML = `${totalItems} items`;
+            .innerHTML = `${totalCartQuantity} items`;
 };
 
 updateCartQuantity();

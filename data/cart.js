@@ -74,12 +74,11 @@ export function removefromCart(productId) {
 }
 
 
-// export function calculateCartQuantity(){
-//   let totalItems = 0;
-//   cart.forEach(cartItem => {
-//       totalItems += cartItem.quantity;
-//   });
-  
-//   document.querySelector('.js-checkout-items')
-//           .innerHTML = `${totalItems} items`;
-// }
+export function calculateCartQuantity(){
+  let cartQuantity = 0;
+  cart.forEach(cartItem => {
+    cartQuantity += cartItem.quantity;
+  });
+
+  return cartQuantity;
+}
