@@ -1,4 +1,4 @@
-export let cart  = JSON.parse(localStorage.getItem('cart')) 
+export let cart  = JSON.parse(localStorage.getItem('cart')); 
 
 if (!cart) {
   cart = [
@@ -72,3 +72,14 @@ export function removefromCart(productId) {
 
   saveToStorage();
 }
+
+
+// export function calculateCartQuantity(){
+//   let totalItems = 0;
+//   cart.forEach(cartItem => {
+//       totalItems += cartItem.quantity;
+//   });
+  
+//   document.querySelector('.js-checkout-items')
+//           .innerHTML = `${totalItems} items`;
+// }
