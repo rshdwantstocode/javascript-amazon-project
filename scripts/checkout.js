@@ -129,6 +129,6 @@ document.querySelectorAll('.js-update-cart')
                 link.addEventListener('click', ()=> {
                     const updateproductId = link.dataset.productId;
                     const updateContainer = document.querySelector(`.js-cart-item-container-${updateproductId}`);
-                        updateContainer.classList.add("is-editing-quantity");
+                            updateContainer.classList.add("is-editing-quantity");
                 });
         });
