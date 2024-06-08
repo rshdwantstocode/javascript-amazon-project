@@ -28,24 +28,28 @@ orderSummaryHTML += `<div class="cart-item-container
         <img class="product-image" src="${matchingProduct.image}">
 
         <div class="cart-item-details">
-            <div class="product-name">
-            ${matchingProduct.name}
-            </div>
-            <div class="product-price">
-            $${moneyMatters(matchingProduct.priceCents)}
-            </div>
-            <div class="product-quantity">
-            <span>
-                Quantity: <span class="quantity-label">${cartItem.quantity}</span>
-            </span>
-            <span class="update-quantity-link link-primary">
-                Update
-            </span>
-            <span class="delete-quantity-link link-primary 
-            js-delete-cart" data-product-id=${matchingProduct.id}>
-                Delete
-            </span>
-            </div>
+                <div class="product-name">
+                ${matchingProduct.name}
+                </div>
+                    <div class="product-price">
+                    $${moneyMatters(matchingProduct.priceCents)}
+                    </div>
+                        <div class="product-quantity">
+                        <span>
+                            Quantity: <span class="quantity-label">${cartItem.quantity}</span>
+                        </span>
+                            <span class="update-quantity-link link-primary js-update-cart"
+                            data-product-id=${matchingProduct.id}>
+                                Update
+                            </span>
+                            <input class="quantity-input">
+                            <span class="save-quantity-link link-primary">Save</span>
+                                
+                                <span class="delete-quantity-link link-primary 
+                                    js-delete-cart" data-product-id=${matchingProduct.id}>
+                                        Delete
+                                </span>
+                    </div>
         </div>
 
         <div class="delivery-options">
@@ -107,15 +111,24 @@ document.querySelector('.js-order-summary')
 
 document.querySelectorAll('.js-delete-cart')
         .forEach((link)=>{
-            link.addEventListener('click', ()=>{
-            const productId = link.dataset.productId;
-                removefromCart(productId);
-            
-                updateCartQuantity();
-            const container =  document.querySelector(
-                `.js-cart-item-container-${productId}`);
-                container.remove();
-            
+                link.addEventListener('click', ()=>{
+                const productId = link.dataset.productId;
+                    removefromCart(productId);
+                
+                    updateCartQuantity();
+                const container =  document.querySelector(
+                    `.js-cart-item-container-${productId}`);
+                    container.remove();
+                
 
-            });
+                });
+        });
+
+document.querySelectorAll('.js-update-cart')
+        .forEach((link) => {
+                link.addEventListener('click', ()=> {
+                    const updateproductId = link.dataset.productId;
+                    const updateContainer = document.querySelector(`.js-cart-item-container-${updateproductId}`);
+                        updateContainer.classList.add("is-editing-quantity");
+                });
         });
