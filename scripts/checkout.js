@@ -142,18 +142,24 @@ document.querySelectorAll('.js-save-cart')
             link.addEventListener('click', ()=> {
                 const updateproductId = link.dataset.productId;
 
-                const updateContainer = document.querySelector(`.js-cart-item-container-${updateproductId}`);
-                        updateContainer.classList.remove("is-editing-quantity");
-
                 const inputValue = document.querySelector(`.js-quantity-${updateproductId}`);
                 let newQuantity = Number(inputValue.value);
-                console.log(newQuantity);
+
+                if (newQuantity <= 0 || newQuantity >= 500) {
+                    alert("Quantity must be 0  to 500");
+                    return;
+                }  
 
                 updateQuantity(updateproductId, newQuantity);
 
+                const container = document.querySelector(`.js-cart-item-container-${updateproductId}`);
+                container.classList.remove('is-editing-quantity');
+
                 const quantityLabel = document.querySelector(`.js-quantity-label-${updateproductId}`);
-                quantityLabel.innerHTML = newQuantity;
+                    quantityLabel.innerHTML = newQuantity;
+
                 setCartQuantity();
             });
+
         });
 
