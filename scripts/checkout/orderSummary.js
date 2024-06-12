@@ -6,14 +6,14 @@ import { products, getProduct } from "../../data/products.js";
 import { moneyMatters } from "../utils/money.js";
 import dayjs from "https://unpkg.com/dayjs@1.11.10/esm/index.js";
 import { deliveryOptions, getDelivery } from "../../data/deliveryOption.js";
-
+import { renderPaymentSummary } from "./paymentSummary.js";
 
 export function renderOrderSummary() {
 let cartSummaryHTML =  '';   
 
 
 cart.forEach((cartItem)=>{
-    
+
     const productID = cartItem.productId;
     const matchingProduct =  getProduct(productID);
 
@@ -94,7 +94,7 @@ function deliveryOptionsHTML(matchingProduct, cartItem) {
                             ${dateString}
                         </div>
                         <div class="delivery-option-price">
-                        ${priceString} - Shipping
+                            ${priceString} - Shipping
                         </div>
                     </div>
         </div>`
@@ -129,7 +129,7 @@ document.querySelectorAll('.js-delete-cart')
                     `.js-cart-item-container-${productId}`);
                     container.remove();
                 
-
+                renderPaymentSummary(); 
                 });
         });
 
@@ -175,6 +175,7 @@ document.querySelectorAll('.js-delivery-option')
                 const {productId, deliveryOptionId} = element.dataset;
                 updateDeliveryOption(productId, deliveryOptionId);
                 renderOrderSummary();
+                renderPaymentSummary();
             });
         });
 }

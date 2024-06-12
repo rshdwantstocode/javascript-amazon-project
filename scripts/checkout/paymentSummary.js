@@ -3,7 +3,7 @@ import { moneyMatters } from "../utils/money.js";
 import { getProduct } from "../../data/products.js";
 import { getDelivery } from "../../data/deliveryOption.js";
 
-export function renderPaymentSumary() {
+export function renderPaymentSummary() {
     let priceCents = 0;
     let shippingPriceCents = 0;
 
