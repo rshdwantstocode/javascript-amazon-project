@@ -2,33 +2,24 @@ import { cart, removefromCart,
     calculateCartQuantity,
     updateQuantity,
     updateDeliveryOption} from "../../data/cart.js";
-import { products } from "../../data/products.js";
+import { products, getProduct } from "../../data/products.js";
 import { moneyMatters } from "../utils/money.js";
 import dayjs from "https://unpkg.com/dayjs@1.11.10/esm/index.js";
-import { deliveryOptions } from "../../data/deliveryOption.js";
+import { deliveryOptions, getDelivery } from "../../data/deliveryOption.js";
+
 
 export function renderOrderSummary() {
-let matchingProduct;
-let orderSummaryHTML =  '';   
+let cartSummaryHTML =  '';   
 
 
 cart.forEach((cartItem)=>{
+    
     const productID = cartItem.productId;
-    products.forEach((product)=>{
-        if (product.id === productID) {
-            matchingProduct = product;
-        };
-    });
+    const matchingProduct =  getProduct(productID);
+
 
     const deliveryOption =  cartItem.deliveryOptionId;
-    let deliveryDateOption;
-
-    
-    deliveryOptions.forEach((option) => {
-        if (option.id === deliveryOption) {
-            deliveryDateOption = option;
-        }
-    });
+    let deliveryDateOption = getDelivery(deliveryOption);
 
 
 
@@ -36,7 +27,7 @@ cart.forEach((cartItem)=>{
     const deliveryDate = today.add(deliveryDateOption.deliveryDays, 'days');
     const dateString = deliveryDate.format('dddd, MMMM DD');
 
-orderSummaryHTML += `<div class="cart-item-container 
+cartSummaryHTML += `<div class="cart-item-container 
     js-cart-item-container-${matchingProduct.id}">
         <div class="delivery-date">
         Delivery date: ${dateString}
@@ -76,14 +67,14 @@ orderSummaryHTML += `<div class="cart-item-container
             <div class="delivery-options-title">
             Choose a delivery option:
             </div>
-            ${deliveryOptionsHTML(productID, cartItem)}
+            ${deliveryOptionsHTML(matchingProduct, cartItem)}
             </div>
         </div>
     </div>`;
 });
 
 
-function deliveryOptionsHTML(productID, cartItem) { 
+function deliveryOptionsHTML(matchingProduct, cartItem) { 
     let html = '';
     deliveryOptions.forEach((delivery)=> {
         const today = dayjs();
@@ -97,7 +88,7 @@ function deliveryOptionsHTML(productID, cartItem) {
         html += ` <div class="delivery-option js-delivery-option"
                     data-product-id=${matchingProduct.id} data-delivery-option-id=${delivery.id}>
 
-                <input type="radio" ${isChecked ? 'checked' : ''} class="delivery-option-input" name="delivery-option-${productID}">
+                <input type="radio" ${isChecked ? 'checked' : ''} class="delivery-option-input" name="delivery-option-${matchingProduct.id}">
                     <div>
                         <div class="delivery-option-date">
                             ${dateString}
@@ -125,7 +116,7 @@ setCartQuantity();
 
 
 document.querySelector('.js-order-summary')
-        .innerHTML = orderSummaryHTML;
+        .innerHTML = cartSummaryHTML;
 
 document.querySelectorAll('.js-delete-cart')
         .forEach((link)=>{
