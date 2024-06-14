@@ -8,7 +8,9 @@ import dayjs from "https://unpkg.com/dayjs@1.11.10/esm/index.js";
 import { deliveryOptions, getDelivery } from "../../data/deliveryOption.js";
 import { renderPaymentSummary } from "./paymentSummary.js";
 
-export function renderOrderSummary() {
+
+
+export function renderOrderSummary() {  
 let cartSummaryHTML =  '';   
 
 
@@ -121,15 +123,13 @@ document.querySelector('.js-order-summary')
 document.querySelectorAll('.js-delete-cart')
         .forEach((link)=>{
                 link.addEventListener('click', ()=>{
-                const productId = link.dataset.productId;
-                    removefromCart(productId);
-                
-                    setCartQuantity();
-                const container =  document.querySelector(
-                    `.js-cart-item-container-${productId}`);
-                    container.remove();
-                
-                renderPaymentSummary(); 
+                    const productId = link.dataset.productId;
+                        removefromCart(productId);
+                    
+                        setCartQuantity();
+                        
+                    renderOrderSummary();
+                    renderPaymentSummary(); 
                 });
         });
 
