@@ -1,6 +1,6 @@
 import { moneyMatters } from "../scripts/utils/money.js";
 
-
+console.log('testing money in cents');
 if (moneyMatters(2095)==='20.95') {
     console.log('passed');
 } else {
