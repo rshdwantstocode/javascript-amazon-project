@@ -26,7 +26,8 @@ cart.forEach((cartItem)=>{
     const deliveryDateOption = getDelivery(deliveryOptionId);
     const dateString = calculateDeliveryDate(deliveryDateOption);
 
-cartSummaryHTML += `<div class="cart-item-container 
+cartSummaryHTML += `<div class="cart-item-container
+    js-cart-item-container
     js-cart-item-container-${matchingProduct.id}">
         <div class="delivery-date">
         Delivery date: ${dateString}
@@ -42,7 +43,7 @@ cartSummaryHTML += `<div class="cart-item-container
                     <div class="product-price">
                     $${moneyMatters(matchingProduct.priceCents)}
                     </div>
-                        <div class="product-quantity">
+                        <div class="product-quantity js-product-quantity-${matchingProduct.id}">
                         <span>
                             Quantity: <span class="quantity-label js-quantity-label-${matchingProduct.id}">${cartItem.quantity}</span>
                         </span>
@@ -56,11 +57,12 @@ cartSummaryHTML += `<div class="cart-item-container
                             data-product-id=${matchingProduct.id}>Save</span>
                                 
                                 <span class="delete-quantity-link link-primary 
-                                    js-delete-cart" data-product-id=${matchingProduct.id}>
+                                    js-delete-cart js-delete-item-${matchingProduct.id}" 
+                                    data-product-id=${matchingProduct.id}>
                                         Delete
                                 </span>
+                        </div>
                     </div>
-        </div>
 
         <div class="delivery-options">
             <div class="delivery-options-title">
