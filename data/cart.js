@@ -37,34 +37,34 @@ export function addtoCart(productId){
         };
     });
 
-    // let quantitySelector = document.querySelector(`.js-quantity-selector-${productId}`); //for the quantity value
-    // let quantity = Number(quantitySelector.value);
+    let quantitySelector = document.querySelector(`.js-quantity-selector-${productId}`); //for the quantity value
+    let quantity = Number(quantitySelector.value);
 
     if (matchItem) {
         matchItem.quantity += 1 ;
     } else {
         cart.push({
           productId,
-          quantity: 1,
+          quantity,
           deliveryOptionId: '1'
       });
     };
 
     saveToStorage();
 
-    //Added paragraph sign
-    // let addedStyle = document.querySelector(`.js-added-cart-${productId}`);
-    // addedStyle.classList.add('added-to-cart-visible');  
+    // Added paragraph sign
+    let addedStyle = document.querySelector(`.js-added-cart-${productId}`);
+    addedStyle.classList.add('added-to-cart-visible');  
 
-    // setTimeout(() => {
-    //   if (messageTimeoutId) {
-    //     clearTimeout(messageTimeoutId);
-    //   }
-    //   const timeoutId = setTimeout(() => {
-    //     addedStyle.classList.remove('added-to-cart-visible');
-    //   }, 2000);
-    //   messageTimeoutId = timeoutId;
-    // });
+    setTimeout(() => {
+      if (messageTimeoutId) {
+        clearTimeout(messageTimeoutId);
+      }
+      const timeoutId = setTimeout(() => {
+        addedStyle.classList.remove('added-to-cart-visible');
+      }, 2000);
+      messageTimeoutId = timeoutId;
+    });
 };
 
 

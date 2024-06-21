@@ -23,7 +23,7 @@ if (moneyMatters(0)==='0.00') {
 }
 
 
-if (moneyMatters(2000.5)==='20.01') {
+if (moneyMatters(-2000.5)==='-20.01') {
     console.log('passed');
 } else {
     console.log('failed');
