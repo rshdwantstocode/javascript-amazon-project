@@ -41,7 +41,7 @@ cartSummaryHTML += `<div class="cart-item-container
                 ${matchingProduct.name}
                 </div>
                     <div class="product-price">
-                    $${moneyMatters(matchingProduct.priceCents)}
+                    ${matchingProduct.getPrice()}
                     </div>
                         <div class="product-quantity js-product-quantity-${matchingProduct.id}">
                         <span>
