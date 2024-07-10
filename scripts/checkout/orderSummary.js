@@ -18,9 +18,8 @@ let cartSummaryHTML =  '';
 
 cart.forEach((cartItem)=>{
 
-    const productID = cartItem.productId;
-    const matchingProduct =  getProduct(productID);
-
+    const productId = cartItem.productId;
+    const matchingProduct =  getProduct(productId);
 
     const deliveryOptionId =  cartItem.deliveryOptionId;
     const deliveryDateOption = getDelivery(deliveryOptionId);
