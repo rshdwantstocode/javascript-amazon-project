@@ -133,3 +133,78 @@ export function loadCart(func) {
   xhr.open('GET', 'https://supersimplebackend.dev/cart');
   xhr.send();
 };
+
+/*
+async function Greeting() {
+  const response = await fetch('https://supersimplebackend.dev/greeting');
+  const text = await response.text();
+  console.log(text);
+
+
+  console.log(promise);
+  const xhr = new XMLHttpRequest();
+
+  xhr.addEventListener('load', () => {
+    console.log(xhr.response);
+  });
+
+  xhr.open('GET', 'https://supersimplebackend.dev/greeting');
+  xhr.send();
+  return promise;
+}
+
+async function GetAmazon() {
+  try {
+    const result = await fetch('https://Amazon.com');
+    console.log( await result.json());
+  } catch (error) {
+    console.log(error);
+      console.log('CORS');
+  }
+}
+
+
+async function SendName() {
+    try {
+        const response = await fetch('https://supersimplebackend.dev/greeting', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            name: 'Ali'
+          })
+        });
+        const promise = await response.text();
+        console.log(promise);
+    } catch (error) {
+      console.log(error);
+    }
+}
+
+async function GreetingBackend() {
+  try {
+    const response = await fetch('https://supersimplebackend.dev/greeting', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+
+    if(response.status >= 400){
+      throw response;
+    }
+    console.log(await response.text());
+
+  } catch (error) {
+    if (error.status === 400) {
+        console.log(await error.json());
+    } else {
+      console.log('Network error.Please try again');
+    }
+  }
+
+  const promise = await response.json();
+  console.log(promise);
+}
+*/
