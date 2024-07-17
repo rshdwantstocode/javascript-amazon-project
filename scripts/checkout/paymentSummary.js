@@ -59,6 +59,7 @@ export function renderPaymentSummary() {
         document.querySelector('.js-payment-summary')
                 .innerHTML = paymentHTML;
 
+
         document.querySelector('.js-place-order')
                 .addEventListener('click', async () => {
                 try  {
@@ -71,7 +72,6 @@ export function renderPaymentSummary() {
                             cart: cart
                         })
                     });
-
                     const order = await response.json();
                     // console.log(typeof order);
                     // console.log(order);
@@ -84,3 +84,4 @@ export function renderPaymentSummary() {
                 window.location.href = 'orders.html';
             });
 };
+

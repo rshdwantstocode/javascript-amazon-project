@@ -102,6 +102,7 @@ export function loadProductsFetch() {
   });
 
   console.log("Load Products");   
+  
   }).catch((error)=>{
     
     console.log(error);
