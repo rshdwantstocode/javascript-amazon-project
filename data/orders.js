@@ -5,6 +5,7 @@ import { getDelivery, calculateDeliveryDate } from "./deliveryOption.js";
 import { loadProductsFetch } from "./products.js";
 import dayjs from "https://unpkg.com/dayjs@1.11.10/esm/index.js";
 
+
 export const orders = JSON.parse(localStorage.getItem('orders')) || [];
 
 
@@ -15,7 +16,7 @@ async function loadPage() {
         let ordersHTML = '';
     
         orders.forEach((order) => {
-            console.log(order);
+            // console.log(order);
         const orderTimeString = dayjs(order.orderTime).format('MMMM D');
     
         ordersHTML += `
@@ -66,14 +67,16 @@ function productsListHTML(order) {
                     <div class="product-quantity">
                     Quantity: ${productDetails.quantity}
                     </div>
-                    <button class="buy-again-button button-primary js-buy-again">
+                    <button class="buy-again-button button-primary js-buy-again"
+                    data-product-id="${product.id}">
                     <img class="buy-again-icon" src="images/icons/buy-again.png">
                     <span class="buy-again-message">Buy it again</span>
                     </button>
                 </div>
                 <div class="product-actions">
                     <a href="tracking.html?orderId=${order.id}&productId=${product.id}">
-                    <button class="track-package-button button-secondary">
+                    <button class="track-package-button button-secondary
+                    js-track-order">
                         Track package
                     </button>
                     </a>
@@ -84,16 +87,36 @@ function productsListHTML(order) {
         return productsListHTML;
     }
     
-        document.querySelector('.js-order-grid').innerHTML = ordersHTML;
+    document.querySelector('.js-order-grid').innerHTML = ordersHTML;
 
-        document.querySelector('.js-buy-again').addEventListener('click', () =>{
-            // addtoCart(orders.id);
-            console.log(orders.id);
+        document.querySelectorAll('.js-buy-again').forEach((button)=>{
+            button.addEventListener('click', ()=>{
+                addtoCart(button.dataset.productId);
+
+                button.innerHTML = 'Added';
+                setTimeout(()=>{
+                    button.innerHTML = `
+                        <img class="buy-again-icon" src="images/icons/buy-again.png">
+                        <span class="buy-again-message">Buy it again</span>
+                        `;
+                    }, 1000);
+            });
         });
 }
     
     loadPage();
 
+export function getOrder(orderId) {
+    let matchingOrder;
+
+    orders.forEach((order) => {
+        if (order.id === orderId) {
+        matchingOrder = order;
+        }
+    });
+
+    return matchingOrder;
+}
 
 
 export function addOrder(order) {
