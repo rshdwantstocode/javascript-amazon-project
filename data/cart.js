@@ -146,6 +146,10 @@ export async function loadCartFetch() {
   return result;
 }
 
+export function resetCart(){
+  cart = [];
+  saveToStorage();
+}
 /*
 async function Greeting() {
   const response = await fetch('https://supersimplebackend.dev/greeting');

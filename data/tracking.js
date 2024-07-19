@@ -24,18 +24,16 @@ async function loadPage() {
         }
     });
 
-    // console.log(order);
-    // console.log(productDetails);
 
     const orderTime = (dayjs(order.orderTime).format('YYMMDD'));
     const deliveryTime = (dayjs(productDetails.estimatedDeliveryTime).format('YYMMDD'));
     let currentTime = (dayjs().format('YYMMDD'));
-    // console.log(orderTime);
-    // console.log(deliveryTime);
-    // console.log(currentTime);
+
 
     let deliveryPercentage = ((currentTime - orderTime) / (deliveryTime - orderTime)) * 100;
-    console.log(deliveryPercentage);
+    
+    const deliveredMessage = currentTime < deliveryTime ? 'Arriving on ' : 'Delivered on';
+
 
     trackHTML += `
         <div class="order-tracking">
@@ -44,7 +42,7 @@ async function loadPage() {
                 </a>
 
                 <div class="delivery-date">
-                Arriving on ${dayjs(productDetails.estimatedDeliveryTime).format('dddd, MMMM D')}
+                ${deliveredMessage} ${dayjs(productDetails.estimatedDeliveryTime).format('dddd, MMMM D')}
                 </div>
 
                 <div class="product-info">
