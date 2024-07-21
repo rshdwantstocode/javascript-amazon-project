@@ -1,9 +1,11 @@
 import { loadProductsFetch, getProduct } from "./products.js";
+import { updateCartQuantity } from "../scripts/amazon.js";
 import { getOrder } from "./orders.js";
 import dayjs from "https://unpkg.com/dayjs@1.11.10/esm/index.js";
 
 
 async function loadPage() {
+    updateCartQuantity();
     await loadProductsFetch();
     let trackHTML = '';
 

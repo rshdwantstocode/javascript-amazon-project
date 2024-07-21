@@ -5,6 +5,13 @@ import { products,loadProducts } from '../data/products.js';
 
 loadProducts(renderProductsGrid);
 
+export function updateCartQuantity() {
+  const totalCartQuantity = calculateCartQuantity();
+
+  document.querySelector('.js-cart-quantity')
+          .innerHTML = totalCartQuantity;
+  }
+
 function renderProductsGrid() {
   let productHTML = ''; 
 
@@ -87,14 +94,6 @@ function renderProductsGrid() {
   let generateProductHTML = document.querySelector('.js-product-grid');
       generateProductHTML.innerHTML = productHTML;
 
-
-
-    function updateCartQuantity() {
-      const totalCartQuantity = calculateCartQuantity();
-
-      document.querySelector('.js-cart-quantity')
-              .innerHTML = totalCartQuantity;
-      }
       updateCartQuantity();
 
 
