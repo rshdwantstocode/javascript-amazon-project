@@ -68,7 +68,7 @@ export function addtoCart(productId){
           messageTimeoutId = timeoutId;
         });
     }
-    
+    console.log('added to cart!');
 };
 
 

@@ -13,7 +13,6 @@ async function loadPage() {
         await loadProductsFetch();
 
         let ordersHTML = '';
-    
         orders.forEach((order) => {
             // console.log(order);
         const orderTimeString = dayjs(order.orderTime).format('MMMM D');
@@ -48,7 +47,7 @@ function productsListHTML(order) {
     
             order.products.forEach((productDetails) => {
                 const product = getProduct(productDetails.productId);
-                console.log(productDetails.productId);
+                console.log(product.id);
         
                 productsListHTML += `
                 <div class="product-image-container">
@@ -67,7 +66,7 @@ function productsListHTML(order) {
                     Quantity: ${productDetails.quantity}
                     </div>
                     <button class="buy-again-button button-primary js-buy-again"
-                    data-product-id="${productDetails.productId}">
+                    data-product-id="${product.id}">
                     <img class="buy-again-icon" src="images/icons/buy-again.png">
                     <span class="buy-again-message">Buy it again</span>
                     </button>
@@ -88,13 +87,12 @@ function productsListHTML(order) {
     
     document.querySelector('.js-order-grid').innerHTML = ordersHTML;
 
-        document.querySelectorAll('.js-buy-again').forEach((button)=>{
+    document.querySelectorAll('.js-buy-again').forEach((button)=>{
 
-            button.addEventListener('click', ()=>{
+        button.addEventListener('click', ()=>{
                 const { productId }  =  button.dataset;
-                console.log(addtoCart(productId));
+                addtoCart(productId);
                 updateCartQuantity();
-                // console.log(button.dataset.productId);
                 // addtoCart(button.dataset.productId);
 
                 button.innerHTML = 'Added';
@@ -104,14 +102,8 @@ function productsListHTML(order) {
                         <span class="buy-again-message">Buy it again</span>
                         `;
                     }, 1000);
-                    
             });
         });
-    // function updateCartQuantity() {
-    //         const totalCartQuantity = calculateCartQuantity();
-    //         document.querySelector('.js-cart-track-quantity')
-    //                 .innerHTML = totalCartQuantity;
-    //         }
         updateCartQuantity();
 }
     
